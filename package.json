@@ -1,9 +1,11 @@
 {
-  "name": "com.gamelovers.inputextension",
-  "displayName": "Input Extension",
+  "name": "com.geuneda.inputextensions",
+  "displayName": "Input Extensions",
+  "author": "geuneda",
   "version": "0.1.0-preview.4",
   "unity": "2019.3",
-  "description": "This package includes the drag extension for the new Input System Package for Unity.\n\nFor more info: https://github.com/Unity-Technologies/InputSystem/tree/develop/ExternalSampleProjects/TouchSamples/Assets/Scripts",
+  "license": "MIT",
+  "description": "Unity의 새로운 Input System 패키지를 위한 드래그 확장 기능을 제공하는 패키지입니다.\n\n터치 및 드래그 입력을 보다 쉽게 처리할 수 있습니다.",
   "dependencies": {
     "com.unity.inputsystem": "1.0.0-preview.4"
   },
