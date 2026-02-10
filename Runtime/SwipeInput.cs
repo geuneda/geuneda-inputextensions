@@ -3,59 +3,59 @@ using UnityEngine;
 namespace Input
 {
     /// <summary>
-    /// Simple object to contain information for a swipe input.
+    /// 스와이프 입력 정보를 담는 간단한 객체입니다.
     /// </summary>
     public struct SwipeInput
     {
         /// <summary>
-        /// ID of input that performed this swipe.
+        /// 이 스와이프를 수행한 입력의 ID입니다.
         /// </summary>
         public readonly int InputId;
 
         /// <summary>
-        /// Position that the swipe began.
+        /// 스와이프가 시작된 위치입니다.
         /// </summary>
         public readonly Vector2 StartPosition;
 
         /// <summary>
-        /// Last position that this swipe was at.
+        /// 이 스와이프의 이전 위치입니다.
         /// </summary>
         public readonly Vector2 PreviousPosition;
 
         /// <summary>
-        /// End position of the swipe.
+        /// 스와이프의 종료 위치입니다.
         /// </summary>
         public readonly Vector2 EndPosition;
 
         /// <summary>
-        /// Average normalized direction of the swipe. This is equivalent to
-        /// <c>(EndPosition - StartPosition).normalized</c>.
+        /// 스와이프의 평균 정규화 방향입니다.
+        /// <c>(EndPosition - StartPosition).normalized</c>와 동일합니다.
         /// </summary>
         public readonly Vector2 SwipeDirection;
 
         /// <summary>
-        /// Average velocity of the swipe in screen units per second.
+        /// 스와이프의 평균 속도입니다 (화면 단위/초).
         /// </summary>
         public readonly float SwipeVelocity;
 
         /// <summary>
-        /// How much the swipe travelled in screen units. Will always be at least the difference between
-        /// <see cref="StartPosition"/> and <see cref="EndPosition"/>, but will be longer for non-straight lines.
+        /// 스와이프가 화면 단위로 이동한 거리입니다. 항상 <see cref="StartPosition"/>과
+        /// <see cref="EndPosition"/> 사이의 거리 이상이며, 직선이 아닌 경우 더 길어집니다.
         /// </summary>
         public readonly float TravelDistance;
 
         /// <summary>
-        /// Duration of the swipe in seconds.
+        /// 스와이프의 지속 시간(초)입니다.
         /// </summary>
         public readonly double SwipeDuration;
 
         /// <summary>
-        /// A normalized measure of how consistent this swipe was in direction.
+        /// 이 스와이프의 방향 일관성을 나타내는 정규화된 측정값입니다.
         /// </summary>
         public readonly float SwipeSameness;
 
         /// <summary>
-        /// Construct a new swipe input from a given gesture.
+        /// 주어진 제스처로부터 새로운 스와이프 입력을 생성합니다.
         /// </summary>
         internal SwipeInput(ActiveGesture gesture) : this()
         {

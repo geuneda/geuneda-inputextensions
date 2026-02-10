@@ -3,32 +3,32 @@ using UnityEngine;
 namespace Input
 {
     /// <summary>
-    /// Simple object to contain information for a tap input.
+    /// 탭 입력 정보를 담는 간단한 객체입니다.
     /// </summary>
     public struct TapInput
     {
         /// <summary>
-        /// Position that the tap started.
+        /// 탭이 시작된 위치입니다.
         /// </summary>
         public readonly Vector2 PressPosition;
 
         /// <summary>
-        /// Position that the tap started.
+        /// 탭이 해제된 위치입니다.
         /// </summary>
         public readonly Vector2 ReleasePosition;
 
         /// <summary>
-        /// How long the tap was held.
+        /// 탭이 유지된 시간입니다.
         /// </summary>
         public readonly double TapDuration;
 
         /// <summary>
-        /// Total amount of drift the tap had, in screen units.
+        /// 탭의 총 이탈 거리(화면 단위)입니다.
         /// </summary>
         public readonly float TapDrift;
 
         /// <summary>
-        /// Timestamp of tap.
+        /// 탭의 타임스탬프입니다.
         /// </summary>
         public readonly double TimeStamp;
 

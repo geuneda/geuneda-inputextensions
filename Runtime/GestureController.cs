@@ -7,60 +7,59 @@ using UnityEngine.UI;
 namespace Input
 {
     /// <summary>
-    /// Controller that interprets takes pointer input from <see cref="PointerInputManager"/> and detects
-    /// directional swipes and detects taps.
+    /// <see cref="PointerInputManager"/>로부터 포인터 입력을 받아
+    /// 방향성 스와이프와 탭을 감지하는 컨트롤러입니다.
     /// </summary>
     public class GestureController : MonoBehaviour
     {
         [SerializeField]
         private PointerInputManager inputManager;
 
-        // Maximum duration of a press before it can no longer be considered a tap.
+        // 탭으로 간주되기 위한 누르기의 최대 지속 시간입니다.
         [SerializeField]
         private float maxTapDuration = 0.2f;
 
-        // Maximum distance in screen units that a tap can drift from its original position before
-        // it is no longer considered a tap.
+        // 탭으로 간주되기 위해 원래 위치에서 벗어날 수 있는 최대 거리(화면 단위)입니다.
         [SerializeField]
         private float maxTapDrift = 5.0f;
 
-        // Maximum duration of a swipe before it is no longer considered to be a valid swipe.
+        // 유효한 스와이프로 간주되기 위한 최대 지속 시간입니다.
         [SerializeField]
         private float maxSwipeDuration = 0.5f;
 
-        // Minimum distance in screen units that a swipe must move before it is considered a swipe.
-        // Note that if this is smaller or equal to maxTapDrift, then it is possible for a user action to be
-        // returned as both a swipe and a tap.
+        // 스와이프로 간주되기 위해 이동해야 하는 최소 거리(화면 단위)입니다.
+        // 이 값이 maxTapDrift보다 작거나 같으면 사용자 동작이
+        // 스와이프와 탭 모두로 반환될 수 있습니다.
         [SerializeField]
         private float minSwipeDistance = 10.0f;
 
-        // How much a swipe should consistently be in the same direction before it is considered a swipe.
+        // 스와이프로 간주되기 위해 필요한 방향 일관성 임계값입니다.
         [SerializeField]
         private float swipeDirectionSamenessThreshold = 0.6f;
 
         [Header("Debug"), SerializeField]
         private Text label;
 
-        // Mapping of input IDs to their active gesture tracking objects.
+        // 입력 ID를 활성 제스처 추적 객체에 매핑합니다.
         private readonly Dictionary<int, ActiveGesture> activeGestures = new Dictionary<int, ActiveGesture>();
 
         /// <summary>
-        /// Event fired when the user presses on the screen.
+        /// 사용자가 화면을 눌렀을 때 발생하는 이벤트입니다.
         /// </summary>
         public new event Action<SwipeInput> Pressed;
 
         /// <summary>
-        /// Event fired for every motion (possibly multiple times a frame) of a potential swipe gesture.
+        /// 잠재적 스와이프 제스처의 모든 움직임(프레임당 여러 번 가능)마다 발생하는 이벤트입니다.
         /// </summary>
         public event Action<SwipeInput> PotentiallySwiped;
 
         /// <summary>
-        /// Event fired when a user performs a swipe gesture.
+        /// 사용자가 스와이프 제스처를 수행했을 때 발생하는 이벤트입니다.
         /// </summary>
         public event Action<SwipeInput> Swiped;
 
         /// <summary>
-        /// Event fired when a user performs a tap gesture, on releasing.
+        /// 사용자가 탭 제스처를 수행하고 손을 뗄 때 발생하는 이벤트입니다.
         /// </summary>
         public event Action<TapInput> Tapped;
 
@@ -72,7 +71,7 @@ namespace Input
         }
 
         /// <summary>
-        /// Checks whether a given active gesture will be a valid swipe.
+        /// 주어진 활성 제스처가 유효한 스와이프인지 확인합니다.
         /// </summary>
         private bool IsValidSwipe(ref ActiveGesture gesture)
         {
@@ -82,7 +81,7 @@ namespace Input
         }
 
         /// <summary>
-        /// Checks whether a given active gesture will be a valid tap.
+        /// 주어진 활성 제스처가 유효한 탭인지 확인합니다.
         /// </summary>
         private bool IsValidTap(ref ActiveGesture gesture)
         {
@@ -106,7 +105,7 @@ namespace Input
         {
             if (!activeGestures.TryGetValue(input.InputId, out var existingGesture))
             {
-                // Probably caught by UI, or the input was otherwise lost
+                // UI에 의해 캡처되었거나 입력이 유실되었을 수 있습니다
                 return;
             }
 
@@ -124,7 +123,7 @@ namespace Input
         {
             if (!activeGestures.TryGetValue(input.InputId, out var existingGesture))
             {
-                // Probably caught by UI, or the input was otherwise lost
+                // UI에 의해 캡처되었거나 입력이 유실되었을 수 있습니다
                 return;
             }
 

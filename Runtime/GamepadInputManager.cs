@@ -4,25 +4,25 @@ using UnityEngine;
 namespace Input
 {
     /// <summary>
-    /// Input manager for controller-style inputs (with analogue sticks and buttons).
+    /// 컨트롤러 스타일 입력(아날로그 스틱과 버튼)을 위한 입력 관리자입니다.
     /// </summary>
     public class GamepadInputManager : MonoBehaviour
     {
-        // Gamepad input action map.
+        // 게임패드 입력 액션 맵입니다.
         private GamepadControls rollingControls;
 
         /// <summary>
-        /// Retrieve current state of analogue stick.
+        /// 아날로그 스틱의 현재 상태를 가져옵니다.
         /// </summary>
         public Vector2 AnalogueValue { get; private set; }
 
         /// <summary>
-        /// Retrieve state of primary button.
+        /// 기본 버튼의 상태를 가져옵니다.
         /// </summary>
         public bool PrimaryButtonValue { get; private set; }
 
         /// <summary>
-        /// Retrieve state of secondary button.
+        /// 보조 버튼의 상태를 가져옵니다.
         /// </summary>
         public bool SecondaryButtonValue { get; private set; }
 

@@ -6,50 +6,50 @@ using UnityEngine.InputSystem.Utilities;
 namespace Input
 {
     /// <summary>
-    /// Simple object to contain information for drag inputs.
+    /// 드래그 입력 정보를 담는 간단한 객체입니다.
     /// </summary>
     public struct PointerInput
     {
         public bool Contact;
 
         /// <summary>
-        /// ID of input type.
+        /// 입력 유형의 ID입니다.
         /// </summary>
         public int InputId;
 
         /// <summary>
-        /// Position of draw input.
+        /// 드로우 입력의 위치입니다.
         /// </summary>
         public Vector2 Position;
 
         /// <summary>
-        /// Orientation of draw input pen.
+        /// 드로우 입력 펜의 기울기입니다.
         /// </summary>
         public Vector2? Tilt;
 
         /// <summary>
-        /// Pressure of draw input.
+        /// 드로우 입력의 압력입니다.
         /// </summary>
         public float? Pressure;
 
         /// <summary>
-        /// Radius of draw input.
+        /// 드로우 입력의 반경입니다.
         /// </summary>
         public Vector2? Radius;
 
         /// <summary>
-        /// Twist of draw input.
+        /// 드로우 입력의 비틀림입니다.
         /// </summary>
         public float? Twist;
     }
 
-    // What we do in PointerInputManager is to simply create a separate action for each input we need for PointerInput.
-    // This here shows a possible alternative that sources all inputs as a single value using a composite. Has pros
-    // and cons. Biggest pro is that all the controls actuate together and deliver one input value.
+    // PointerInputManager에서는 PointerInput에 필요한 각 입력에 대해 별도의 액션을 생성합니다.
+    // 여기서는 컴포지트를 사용하여 모든 입력을 단일 값으로 제공하는 대안을 보여줍니다.
+    // 장단점이 있으며, 가장 큰 장점은 모든 컨트롤이 함께 작동하여 하나의 입력 값을 전달한다는 것입니다.
     //
-    // NOTE: In PointerControls, we are binding mouse and pen separately from touch. If we didn't care about multitouch,
-    //       we wouldn't have to to that but could rather just bind `<Pointer>/position` etc. However, to source each touch
-    //       as its own separate PointerInput source, we need to have multiple PointerInputComposites.
+    // 참고: PointerControls에서 마우스와 펜은 터치와 별도로 바인딩됩니다. 멀티터치가 필요 없다면
+    //       `<Pointer>/position` 등으로 바인딩할 수 있습니다. 하지만 각 터치를 별도의
+    //       PointerInput 소스로 제공하려면 여러 개의 PointerInputComposite가 필요합니다.
     #if UNITY_EDITOR
     [UnityEditor.InitializeOnLoad]
     #endif

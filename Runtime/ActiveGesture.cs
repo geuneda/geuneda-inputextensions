@@ -3,72 +3,72 @@ using UnityEngine;
 namespace Input
 {
     /// <summary>
-    /// An in-progress potential gesture for given input.
+    /// 주어진 입력에 대해 진행 중인 잠재적 제스처입니다.
     /// </summary>
     internal sealed class ActiveGesture
     {
         /// <summary>
-        /// Input ID that generated this gesture.
+        /// 이 제스처를 생성한 입력 ID입니다.
         /// </summary>
         public int InputId;
 
         /// <summary>
-        /// The time this potential gesture started.
+        /// 이 잠재적 제스처가 시작된 시간입니다.
         /// </summary>
         public readonly double StartTime;
 
         /// <summary>
-        /// The time this potential gesture ended.
+        /// 이 잠재적 제스처가 종료된 시간입니다.
         /// </summary>
         public double EndTime;
 
         /// <summary>
-        /// The position this gesture started at.
+        /// 이 제스처가 시작된 위치입니다.
         /// </summary>
         public readonly Vector2 StartPosition;
 
         /// <summary>
-        /// The position this gesture was at during the last sample.
+        /// 마지막 샘플 시점에서 이 제스처의 위치입니다.
         /// </summary>
         public Vector2 PreviousPosition;
 
         /// <summary>
-        /// The position this gesture ended at.
+        /// 이 제스처가 종료된 위치입니다.
         /// </summary>
         public Vector2 EndPosition;
 
         /// <summary>
-        /// How many samples we had for this gesture.
+        /// 이 제스처에 대한 샘플 수입니다.
         /// </summary>
         public int Samples;
 
         /// <summary>
-        /// How consistent the swipe was in its direction. Approaches 1 for straight lines.
+        /// 스와이프 방향의 일관성입니다. 직선에 가까울수록 1에 수렴합니다.
         /// </summary>
         /// <remarks>
-        /// This is calculated as the average of the dot products of every line segment (normalized) against a normalized
-        /// vector to the tip of the swipe from the start.
+        /// 모든 선분(정규화)의 내적을 시작점에서 스와이프 끝까지의 정규화된
+        /// 벡터에 대해 계산한 평균값입니다.
         /// </remarks>
         public float SwipeDirectionSameness;
 
         /// <summary>
-        /// The total travel distance this gesture's made in screen units. This will always be AT LEAST the distance
-        /// between <see cref="StartPosition"/> and <see cref="EndPosition"/>, but will likely be longer for any
-        /// non straight line gestures.
+        /// 이 제스처의 화면 단위 총 이동 거리입니다. 항상 <see cref="StartPosition"/>과
+        /// <see cref="EndPosition"/> 사이의 거리 이상이며, 직선이 아닌 제스처의 경우
+        /// 더 길어질 수 있습니다.
         /// </summary>
         public float TravelDistance;
 
         /// <summary>
-        /// Accumulated sum of all normalized movement vectors.
+        /// 모든 정규화된 이동 벡터의 누적 합입니다.
         /// </summary>
         private Vector2 accumulatedNormalized;
 
         /// <summary>
-        /// Instantiate a new potential gesture.
+        /// 새로운 잠재적 제스처를 생성합니다.
         /// </summary>
-        /// <param name="inputId">The input id for this gesture.</param>
-        /// <param name="startPosition">The gesture's start position.</param>
-        /// <param name="startTime">The time the gesture has started.</param>
+        /// <param name="inputId">이 제스처의 입력 ID입니다.</param>
+        /// <param name="startPosition">제스처의 시작 위치입니다.</param>
+        /// <param name="startTime">제스처가 시작된 시간입니다.</param>
         public ActiveGesture(int inputId, Vector2 startPosition, double startTime)
         {
             InputId = inputId;
@@ -80,31 +80,31 @@ namespace Input
         }
 
         /// <summary>
-        /// Submit a new position to this gesture.
+        /// 이 제스처에 새로운 위치를 제출합니다.
         /// </summary>
-        /// <param name="position">The position of the new sample.</param>
-        /// <param name="time">The time of the new sample.</param>
+        /// <param name="position">새 샘플의 위치입니다.</param>
+        /// <param name="time">새 샘플의 시간입니다.</param>
         public void SubmitPoint(Vector2 position, double time)
         {
             Vector2 toNewPosition = position - EndPosition;
             float distanceMoved = toNewPosition.magnitude;
 
-            // Set new end time
+            // 새로운 종료 시간을 설정합니다
             EndTime = time;
 
             if (Mathf.Approximately(distanceMoved, 0))
             {
-                // Skipping point that is in the same position as the last one
+                // 이전 위치와 동일한 지점은 건너뜁니다
                 return;
             }
 
-            // Normalize
+            // 정규화
             toNewPosition /= distanceMoved;
 
             Samples++;
             Vector2 toNewEndPosition = (position - StartPosition).normalized;
 
-            // Set new end position and previous positions
+            // 새로운 종료 위치와 이전 위치를 설정합니다
             PreviousPosition = EndPosition;
             EndPosition = position;
 
