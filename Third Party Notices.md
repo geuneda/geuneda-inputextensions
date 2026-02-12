@@ -1,9 +1,9 @@
-This package contains third-party software components governed by the license(s) indicated below:
+이 패키지에는 아래에 명시된 라이선스에 따라 관리되는 서드파티 소프트웨어 구성 요소가 포함되어 있습니다:
 ---------
 
-Component Name: Input Extensions
+구성 요소 이름: Input Extensions
 
-License Type: **Unity Companion Package License v1.0 ("_License_")**
+라이선스 유형: **Unity Companion Package License v1.0 ("_License_")**
 
 Copyright © 2019 Unity Technologies ApS ("**_Unity_**")
 
@@ -15,13 +15,13 @@ Unity hereby grants to you a worldwide, non-exclusive, no-charge, and royalty-fr
 
 1. *Ownership & Grant Back to You*.
 
-    3.1. You own your content. In this License, "derivative works" means derivatives of the Software itself--works derived only from the Software by you under this License (for example, modifying the code of the Software itself to improve its efficacy); “derivative works” of the Software do not include, for example, games, apps, or content that you create using the Software. You keep all right, title, and interest to your own content.
+    3.1. You own your content. In this License, "derivative works" means derivatives of the Software itself--works derived only from the Software by you under this License (for example, modifying the code of the Software itself to improve its efficacy); "derivative works" of the Software do not include, for example, games, apps, or content that you create using the Software. You keep all right, title, and interest to your own content.
 
     3.2. Unity owns its content. While you keep all right, title, and interest to your own content per the above, as between Unity and you, Unity will own all right, title, and interest to all intellectual property rights (including patent, trademark, and copyright) in the Software and derivative works of the Software, and you hereby assign and agree to assign all such rights in those derivative works to Unity.
 
     3.3. You have a license to those derivative works. Subject to this License, Unity grants to you the same worldwide, non-exclusive, no-charge, and royalty-free copyright license to derivative works of the Software you create as is granted to you for the Software under this License.
 
-1. *Trademarks*. You are not granted any right or license under this License to use any trademarks, service marks, trade names, products names, or branding of Unity or its affiliates ("**_Trademarks_**"). Descriptive uses of Trademarks are permitted; see, for example, Unity’s Branding Usage Guidelines at [https://unity3d.com/public-relations/brand](https://unity3d.com/public-relations/brand).
+1. *Trademarks*. You are not granted any right or license under this License to use any trademarks, service marks, trade names, products names, or branding of Unity or its affiliates ("**_Trademarks_**"). Descriptive uses of Trademarks are permitted; see, for example, Unity's Branding Usage Guidelines at [https://unity3d.com/public-relations/brand](https://unity3d.com/public-relations/brand).
 
 1. *Notices & Third-Party Rights*. This License, including the copyright notice above, must be provided in all substantial portions of the Software and derivative works thereof (or, if that is impracticable, in any other location where such notices are customarily placed). Further, if the Software is accompanied by a Unity "third-party notices" or similar file, you acknowledge and agree that software identified in that file is governed by those separate license terms.
 
