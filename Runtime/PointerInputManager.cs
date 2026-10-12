@@ -20,10 +20,11 @@ namespace Input
     /// - 마우스와 펜은 하나의 컴포지트로 묶여 있습니다. 이들은 서로 독립적으로 사용되지 않으므로
     ///   별도의 포인터 소스로 표현할 필요가 없다는 전제입니다. 하지만 마우스용
     ///   <see cref="PointerInputComposite"/>와 펜용을 각각 만들 수도 있습니다.
-    /// - <see cref="PointerControls.PointerActions.point"/>에서 <see cref="InputAction.passThrough"/>가
-    ///   활성화되어 있습니다. 이는 하나의 액션을 통해 임의의 여러 포인터 입력을 받기 위함입니다.
-    ///   패스스루 없이는 액션의 기본 충돌 해결이 작동하여 한 번에 하나의
-    ///   컴포지트 바인딩만 통과시킵니다.
+    /// - <see cref="PointerControls.PointerActions.point"/>의 액션 타입은 <see cref="InputActionType.Value"/>이며
+    ///   <see cref="InputActionType.PassThrough"/>가 아닙니다. 따라서 액션의 기본 충돌 해결이 적용되어
+    ///   여러 컴포지트 바인딩(마우스/펜, 터치 0~4)이 동시에 작동하면 한 번에 하나의 컴포지트만
+    ///   액션을 구동할 수 있습니다. 여러 포인터 입력을 동시에 받으려면 `.inputactions`에서
+    ///   액션 타입을 PassThrough로 바꿔야 합니다.
     /// </remarks>
     public class PointerInputManager : MonoBehaviour
     {
@@ -96,8 +97,9 @@ namespace Input
             {
                 Dragged?.Invoke(drag, context.time);
             }
-            else
+            else if (!drag.Contact && m_Dragging)
             {
+                // 눌린 적이 있을 때만 해제를 발행합니다. 누르지 않은 상태의 포인터 이동(마우스 호버 등)은 무시합니다.
                 Released?.Invoke(drag, context.time);
                 m_Dragging = false;
             }

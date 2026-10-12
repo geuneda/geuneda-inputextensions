@@ -89,8 +89,8 @@ GamepadControls  ->  GamepadInputManager
 ### 주의 사항
 
 - 네임스페이스 `Input` 이 전역 네임스페이스에 있어서 `UnityEngine.Input` 클래스를 가립니다. 이 어셈블리를 참조하는 코드에서 레거시 입력 API 를 쓰려면 `UnityEngine.Input.GetKey(...)` 처럼 완전한 이름을 써야 합니다.
-- `PointerInputManager` 는 포인터 전체에 대해 누름 상태 플래그 하나만 관리하고, `Contact` 가 false 인 값이 들어오면 누름 상태와 관계없이 `Released` 를 발행합니다. `PointerInputManager` 를 직접 구독할 때는 누름 상태를 직접 추적하세요.
-- 현재 구현에서는 `GestureController` 의 시간 조건(`maxTapDuration`, `maxSwipeDuration`)이 판정에 실제로 반영되지 않습니다. 탭/스와이프는 이동 거리와 방향 일관성으로만 구분됩니다.
+- `PointerInputManager` 는 포인터 전체에 대해 누름 상태 플래그 하나만 관리합니다. `Released` 는 누름 상태일 때만 발행되지만, 여러 포인터를 동시에 쓰면 두 번째 포인터의 첫 접촉이 `Pressed` 가 아니라 `Dragged` 로 오는 등 포인터별로 정확히 추적되지 않습니다.
+- `GestureController` 는 누른 시점부터 뗀 시점까지의 지속 시간이 `maxTapDuration` 이하일 때만 탭, `maxSwipeDuration` 이하일 때만 스와이프로 판정합니다. `minSwipeDistance <= maxTapDrift` 이면 한 동작이 `Swiped` 와 `Tapped` 를 모두 발행할 수 있습니다.
 - `GestureController` 의 디버그용 `label` 을 연결하면 `Camera.main` 을 사용하므로 씬에 MainCamera 태그가 붙은 카메라가 있어야 합니다.
 - `Input.Controls` 의 `PointerControls`, `GamepadControls` 는 자동 생성 코드이므로 직접 수정하지 말고 `.inputactions` 파일을 고친 뒤 다시 생성합니다.
 
@@ -99,10 +99,10 @@ GamepadControls  ->  GamepadInputManager
 - Unity 2019.3 이상
 - `com.unity.inputsystem` 1.0.0-preview.4 이상(`package.json` 선언 기준)
 - Player Settings 의 `Active Input Handling` 에서 Input System 을 사용하도록 설정해야 합니다.
-- 런타임 코드가 uGUI(`UnityEngine.UI.Text`, `UnityEngine.EventSystems.PointerInputModule`)를 사용하지만 `package.json` 의존성에는 선언되어 있지 않습니다. 프로젝트에 `com.unity.ugui` 가 설치되어 있어야 합니다.
+- `com.unity.ugui` 1.0.0 이상(`package.json` 선언 기준, Unity 6 에서는 2.0.0 으로 해석). 런타임 코드가 `UnityEngine.UI.Text`, `UnityEngine.EventSystems.PointerInputModule` 을 사용합니다.
 
 변경 내역은 [CHANGELOG.md](CHANGELOG.md) 를 참고하세요.
 
 ## 라이선스
 
-`package.json` 의 license 필드는 MIT 입니다. 이 패키지에는 Unity Technologies 의 코드가 포함되어 있으며 해당 구성 요소는 Unity Companion Package License v1.0 을 따릅니다. 자세한 내용은 [Third Party Notices.md](Third%20Party%20Notices.md) 를 참고하세요.
+MIT 라이선스입니다. 자세한 내용은 [LICENSE.md](LICENSE.md) 를 참고하세요. 이 패키지에는 Unity Technologies 의 코드가 포함되어 있으며 해당 구성 요소는 Unity Companion Package License v1.0 을 따릅니다. 자세한 내용은 [Third Party Notices.md](Third%20Party%20Notices.md) 를 참고하세요.

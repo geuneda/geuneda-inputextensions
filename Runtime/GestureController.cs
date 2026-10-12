@@ -46,7 +46,7 @@ namespace Input
         /// <summary>
         /// 사용자가 화면을 눌렀을 때 발생하는 이벤트입니다.
         /// </summary>
-        public new event Action<SwipeInput> Pressed;
+        public event Action<SwipeInput> Pressed;
 
         /// <summary>
         /// 잠재적 스와이프 제스처의 모든 움직임(프레임당 여러 번 가능)마다 발생하는 이벤트입니다.
@@ -76,7 +76,7 @@ namespace Input
         private bool IsValidSwipe(ref ActiveGesture gesture)
         {
             return gesture.TravelDistance >= minSwipeDistance &&
-                (gesture.StartTime - gesture.EndTime) <= maxSwipeDuration &&
+                (gesture.EndTime - gesture.StartTime) <= maxSwipeDuration &&
                 gesture.SwipeDirectionSameness >= swipeDirectionSamenessThreshold;
         }
 
@@ -86,7 +86,7 @@ namespace Input
         private bool IsValidTap(ref ActiveGesture gesture)
         {
             return gesture.TravelDistance <= maxTapDrift &&
-                (gesture.StartTime - gesture.EndTime) <= maxTapDuration;
+                (gesture.EndTime - gesture.StartTime) <= maxTapDuration;
         }
 
         private void OnPressed(PointerInput input, double time)
