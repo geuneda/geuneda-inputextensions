@@ -4,6 +4,11 @@
 이 형식은 [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)를 기반으로 하며,
 이 프로젝트는 [Semantic Versioning](http://semver.org/spec/v2.0.0.html)을 따릅니다.
 
+## [1.0.4] - 2026-10-12
+
+**변경 (최소 요구 버전 상향)**:
+- `com.unity.inputsystem` 의존성을 `1.0.0-preview.4` 에서 `1.1.1` 로, 최소 Unity 를 2019.3 에서 2019.4 로 올렸습니다. `point` 액션의 초기 상태 검사(활성화할 때 이미 눌린 포인터를 `Pressed` 로 받음)는 PassThrough 액션에 대해 Input System 1.1 부터 동작하며, 1.1.1 은 Unity 2019.4 이상을 요구합니다.
+
 ## [1.0.3] - 2026-10-12
 
 **수정**:
