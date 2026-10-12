@@ -89,7 +89,7 @@ GamepadControls  ->  GamepadInputManager
 ### 주의 사항
 
 - 네임스페이스 `Input` 이 전역 네임스페이스에 있어서 `UnityEngine.Input` 클래스를 가립니다. 이 어셈블리를 참조하는 코드에서 레거시 입력 API 를 쓰려면 `UnityEngine.Input.GetKey(...)` 처럼 완전한 이름을 써야 합니다.
-- `PointerInputManager` 는 포인터 전체에 대해 누름 상태 플래그 하나만 관리합니다. `Released` 는 누름 상태일 때만 발행되지만, 여러 포인터를 동시에 쓰면 두 번째 포인터의 첫 접촉이 `Pressed` 가 아니라 `Dragged` 로 오는 등 포인터별로 정확히 추적되지 않습니다.
+- `PointerInputManager` 는 누름 상태를 `PointerInput.InputId` 별로 관리합니다. 포인터마다 첫 접촉은 `Pressed`, 이후 이동은 `Dragged`, 해제는 `Released` 로 옵니다. `point` 액션이 PassThrough 라 여러 포인터(멀티터치, 마우스와 터치 동시)를 함께 받고, 초기 상태 검사가 켜져 있어 활성화할 때 이미 눌린 포인터도 `Pressed` 로 옵니다(Input System 1.1 이상. 선언된 최소 버전 1.0.0-preview.4 처럼 그 미만에서는 활성화 뒤 첫 입력 변화부터 받습니다). 컴포넌트가 비활성화되거나 액션이 리셋되거나 장치가 분리되면 이벤트 없이 그 포인터들의 눌림 상태만 비웁니다(입력 콜백 안에서 비활성화해도 `Released` 로 처리되지 않습니다). 그 뒤 같은 포인터의 접촉은 다시 `Pressed` 로 오므로, 직접 상태를 추적한다면 같은 `InputId` 의 `Pressed` 를 새 시작으로 처리하고 자신의 `OnDisable` 에서도 상태를 비우세요. `GestureController` 는 남은 제스처를 새 `Pressed` 에서 교체합니다.
 - `GestureController` 는 누른 시점부터 뗀 시점까지의 지속 시간이 `maxTapDuration` 이하일 때만 탭, `maxSwipeDuration` 이하일 때만 스와이프로 판정합니다. `minSwipeDistance <= maxTapDrift` 이면 한 동작이 `Swiped` 와 `Tapped` 를 모두 발행할 수 있습니다.
 - `GestureController` 의 디버그용 `label` 을 연결하면 `Camera.main` 을 사용하므로 씬에 MainCamera 태그가 붙은 카메라가 있어야 합니다.
 - `Input.Controls` 의 `PointerControls`, `GamepadControls` 는 자동 생성 코드이므로 직접 수정하지 말고 `.inputactions` 파일을 고친 뒤 다시 생성합니다.

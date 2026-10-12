@@ -22,11 +22,12 @@ namespace Input.Controls
             ""actions"": [
                 {
                     ""name"": ""point"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""4d610105-c5af-439c-8a02-4f1976d8da67"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [

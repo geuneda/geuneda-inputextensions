@@ -91,10 +91,9 @@ namespace Input
 
         private void OnPressed(PointerInput input, double time)
         {
-            Debug.Assert(!activeGestures.ContainsKey(input.InputId));
-
             var newGesture = new ActiveGesture(input.InputId, input.Position, time);
-            activeGestures.Add(input.InputId, newGesture);
+            // 관리자 비활성화 등으로 해제를 받지 못하고 남은 제스처가 있어도 예외 없이 새 제스처로 바꾼다
+            activeGestures[input.InputId] = newGesture;
 
             DebugInfo(newGesture);
 
