@@ -42,6 +42,8 @@ namespace Input
 
         // 입력 ID를 활성 제스처 추적 객체에 매핑합니다.
         private readonly Dictionary<int, ActiveGesture> activeGestures = new Dictionary<int, ActiveGesture>();
+        // 정리할 제스처 ID 를 모으는 재사용 목록(누를 때마다 할당하지 않기 위함)
+        private readonly List<int> staleGestureIds = new List<int>();
 
         /// <summary>
         /// 사용자가 화면을 눌렀을 때 발생하는 이벤트입니다.
@@ -91,13 +93,37 @@ namespace Input
 
         private void OnPressed(PointerInput input, double time)
         {
+            RemoveStaleGestures();
+
             var newGesture = new ActiveGesture(input.InputId, input.Position, time);
-            // 관리자 비활성화 등으로 해제를 받지 못하고 남은 제스처가 있어도 예외 없이 새 제스처로 바꾼다
+            // 관리자 비활성화 등으로 해제를 받지 못하고 남은 같은 ID 의 제스처가 있어도 예외 없이 새 제스처로 바꾼다
             activeGestures[input.InputId] = newGesture;
 
             DebugInfo(newGesture);
 
             Pressed?.Invoke(new SwipeInput(newGesture));
+        }
+
+        /// <summary>
+        /// 관리자가 비활성화되거나 장치가 분리되어 해제를 받지 못한 채 남은 제스처를 지웁니다.
+        /// 관리자에서 더 이상 눌려 있지 않은 포인터의 제스처만 지우므로 진행 중인 멀티터치는 유지됩니다.
+        /// </summary>
+        private void RemoveStaleGestures()
+        {
+            staleGestureIds.Clear();
+
+            foreach (var pair in activeGestures)
+            {
+                if (!inputManager.IsPointerPressed(pair.Key))
+                {
+                    staleGestureIds.Add(pair.Key);
+                }
+            }
+
+            foreach (var inputId in staleGestureIds)
+            {
+                activeGestures.Remove(inputId);
+            }
         }
 
         private void OnDragged(PointerInput input, double time)

@@ -4,6 +4,12 @@
 이 형식은 [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)를 기반으로 하며,
 이 프로젝트는 [Semantic Versioning](http://semver.org/spec/v2.0.0.html)을 따릅니다.
 
+## [1.0.3] - 2026-10-12
+
+**수정**:
+- `PointerInputManager` 의 장치 분리 처리에서 C# 8 문법(`??=`)을 써서 선언된 최소 Unity 2019.3(C# 7.3)에서 컴파일되지 않던 문제 수정
+- `GestureController` 가 관리자 비활성화나 장치 분리로 해제를 받지 못한 제스처를 같은 ID 가 다시 눌릴 때만 교체해, ID 가 바뀌는 터치에서는 남은 제스처가 쌓이던 문제 수정. 새 `Pressed` 때 관리자에서 더 이상 눌려 있지 않은 포인터의 제스처를 정리합니다(진행 중인 멀티터치는 유지)
+
 ## [1.0.2] - 2026-10-12
 
 **수정**:

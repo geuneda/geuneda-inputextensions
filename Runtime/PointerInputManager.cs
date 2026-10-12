@@ -84,6 +84,14 @@ namespace Input
             m_Controls?.Disable();
         }
 
+        /// <summary>
+        /// 주어진 포인터가 지금 눌려 있는지 확인합니다. 해제를 받지 못하고 끝난 포인터의 상태를 정리할 때 씁니다.
+        /// </summary>
+        internal bool IsPointerPressed(int inputId)
+        {
+            return m_PressedPointers.ContainsKey(inputId);
+        }
+
         private void OnActionCanceled(InputAction.CallbackContext context)
         {
             m_PressedPointers.Clear();
@@ -98,8 +106,13 @@ namespace Input
             List<int> removedPointers = null;
             foreach (var pair in m_PressedPointers)
             {
-                if (pair.Value == device)
-                    (removedPointers ??= new List<int>()).Add(pair.Key);
+                if (pair.Value != device)
+                    continue;
+
+                if (removedPointers == null)
+                    removedPointers = new List<int>();
+
+                removedPointers.Add(pair.Key);
             }
 
             if (removedPointers == null)
